@@ -17,15 +17,6 @@ click() {
   
 }
 
-;right click that mimics my clicks
-rightClick() {
-
-	click, down, right
-	clickDelay := NormalRand(65, 95)
-	sleep %clickDelay%
-	click, up, right
-
-}
 
 ;logs out of game
 logOut() {
