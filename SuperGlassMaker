@@ -7,7 +7,7 @@
 ;This also assumes that you remapped options to shift click to deposit all and shift click to withdraw X, also assumes using escape to exit interface
 
 
-
+;click function that mimics my clicks
 click() {
 
 	click, down
@@ -17,6 +17,7 @@ click() {
   
 }
 
+;right click that mimics my clicks
 rightClick() {
 
 	click, down, right
@@ -26,7 +27,7 @@ rightClick() {
 
 }
 
-
+;logs out of game
 logOut() {
 
 	ml := NormalRand(200,400)
@@ -46,7 +47,7 @@ logOut() {
   
 }
 
-
+;simulates player looking at progress of skill being trained
 checkMagicLvl() {
 
 	send {F2 down}
@@ -64,7 +65,7 @@ checkMagicLvl() {
 					
 }
 
-
+;simulates player looking at progress of skill being trained
 checkCraftingLvl() {
 
 	send {F2 down}
@@ -82,6 +83,7 @@ checkCraftingLvl() {
 					
 }
 
+;opens the bank and waits for interface to pop up
 clickBank() {
 
 	PixelSearch, Px, Py, 185, 197, 523, 327, 0x00FF00, 1, Fast
@@ -98,7 +100,7 @@ clickBank() {
 
 }
 
-
+;withdraws raw material
 getSeaWeed() {
 	
 	ml := NormalRand(375,625)
@@ -115,7 +117,7 @@ getSeaWeed() {
 	actionDelay()
 }
 
-
+;withdraws raw material
 getSand() {
 
 	ml := NormalRand(200,400)
@@ -133,7 +135,7 @@ getSand() {
 
 }
 
-
+;closes bank
 exitBank() {
 
 	send, {Esc down}
@@ -142,7 +144,7 @@ exitBank() {
 
 }
 
-
+;delay in ms that mimics my delay between mouse inputs
 actionDelay() {
 
 	rest := NormalRand(140,210)
@@ -150,7 +152,7 @@ actionDelay() {
 
 }
 
-
+;casts the spell to make glass, if spellbook isn't open it opens spellbook
 glassMake() {
 
 	PixelSearch, Px, Py, 676, 433, 865, 554, 0xECECED, 1, Fast
@@ -183,7 +185,7 @@ glassMake() {
 
 }
 
-
+;banks the glass made
 bankGlass() {
 
 	PixelSearch, Px, Py, 735, 395, 766, 412, 0x96A5D4, 1, Fast
@@ -204,7 +206,7 @@ bankGlass() {
 
 }
 
-
+;this function picks up glass off the floor if excess is made
 pickUpGlass() {
 
 	PixelSearch, Px, Py, 246, 288, 600, 470, 0x7C99D8, 1, Fast
@@ -225,7 +227,7 @@ pickUpGlass() {
 
 }
 
-
+;waits for spell to finish animation
 waitForGlass() {
 	
 	rest := NormalRand(2000,2700)
@@ -237,6 +239,7 @@ waitForGlass() {
 global glassFound := 0
 global odds := 0
 
+;this glass checks to see if excess was made, and changes a global variable for another function to know to pick up the glass
 checkFloor() {
 	
 	glassFound := 0
@@ -251,6 +254,7 @@ checkFloor() {
 
 }
 
+;I combined both check level functions into one function call, where it takes an int parameter, checks magic if the parameter is even, crafting if parameter is odd
 checkLevels(odds) {
 
 	exitBank()
@@ -264,6 +268,7 @@ checkLevels(odds) {
 
 }
 
+;simulates afk breaks between 15 seconds and 2 minutes with mouse on screen and between 20 seconds and 2.5 minutes with mouse off screen
 afk(odds) {
 
 	if(Mod(odds,2) == 0) {
