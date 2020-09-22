@@ -3,8 +3,8 @@
 
 
 
-;-------------------------------------- RUN THIS AT FOSSIL ISLAND BANK CHEST WITH GREEN SQUARE OVER BANK ------------------------
-;This also assumes that you remapped options to shift click to deposit all and shift click to withdraw X, also assumes using escape to exit interface
+;NormalRand is a weighted random function, RandomBezier is the function to make non-linear mouse movements.
+
 
 
 ;click function that mimics my clicks
