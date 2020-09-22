@@ -1,8 +1,6 @@
 #If WinActive("RuneLite") or WinActive("Old School RuneScape") or WinActive("OSBuddy") or WinActive("OSBuddy Pro")
+;This line prevents the hotkeys from being used unless inside a runescape client
 
-pressTwo() {
-	Send, 2
-}
 
 rightClick() {
 	
