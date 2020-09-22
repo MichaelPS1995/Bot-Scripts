@@ -1,10 +1,7 @@
 #Include, RandomBezier.ahk
 #Include, NormalRand.ahk
 
-
-;The color to look for to see a crafting lvl is 0x093D5B, it does keep going with the new unlocks 0x093D7A
-;exits the glass making, you need to use glassblowing pipe with glass again
-;color of glass to click the tab to start crafting is 0x7C92D0
+;NormalRand is a weighted random function, RandomBezier is the function to make non-linear mouse movements.
 
 global odds := 0
 global guess := 0
