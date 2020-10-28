@@ -1,22 +1,23 @@
 #If WinActive("RuneLite") or WinActive("Old School RuneScape") or WinActive("OSBuddy") or WinActive("OSBuddy Pro")
-;This line prevents the hotkeys from being used unless inside a runescape client
+#Include, NormalRand.ahk
 
 
 rightClick() {
 	
 	Click, down right
 	Random, rand, 20, 35
-	sleep %rand%
+	actionDelay()
 	Click, up right
+	actionDelay()
 
 }
 
 leftClick() {
 	
 	Click, down left
-	Random, rand, 20, 35
-	sleep %rand%
+	actionDelay()
 	Click, up left
+	actionDelay()
 }
 
 
@@ -24,8 +25,9 @@ setXValue(){
 	Send, 14
 	sleep 120
 	Send, {enter down}
-	Random, rand, 15, 30
+	actionDelay()
 	Send, {enter up}
+	actionDelay()
 }
 
 ;This is the mouse move to move down from the right click to set to 14 [	Mousemove, 3, 90, 3, Rel		]
@@ -36,6 +38,7 @@ getVial() {
 	Random, randY, 115, 135
 	Mousemove %randX% , %randY%, 6
 	leftClick()
+	actionDelay()
 }
 
 getHerb() {
@@ -44,37 +47,65 @@ getHerb() {
 	Random, randY, 115, 135
 	Mousemove %randX% , %randY%, 6
 	leftClick()
+	actionDelay()
 	
 }
 
+actionDelay() {
+
+	rest := NormalRand(140,210)
+	sleep %rest%
+
+}
+
+;This first block gets everything set up correctly for the loop to run smoothly
+
 2::
+	Pixelsearch, px, py, 334, 30, 433, 90, 0x08405A, 1, Fast
+	if (ErrorLevel != 0) {
+		Mousemove 650, 510, 6
+		actionDelay()
+		leftClick()
+		actionDelay()
+		Mousemove 650, 460, 6
+		actionDelay()
+		leftClick()
+		exitapp
+	}
 
 	Random, randX, 200, 300
 	Random, randY, 40, 210
 	Mousemove, %randX% , %randY%, 6
-	sleep 232
 	leftClick()
-	sleep 252
 	Mousemove 313, 346, 6
+	actionDelay()
 	leftClick()
-	sleep 243
 	Mousemove, 91, 124, 6
-	sleep 234
 	rightClick()
-	sleep 225
 	Mousemove, 3, 97, 3, Rel
-	sleep 253
 	leftClick()
-	sleep 2000
+	sleep NormalRand(2000,2200)
 	setXValue()
-	sleep 150
+	actionDelay()
 	getHerb()
 	Random, randX, 484, 496
 	Random, randY, 42, 58
 	Mousemove, %randX% , %randY%, 6
 	leftClick()
 
+	Breakloop = 0
+	
 	loop {
+		Pixelsearch, px, py, 334, 30, 433, 90, 0x08405A, 1, Fast
+		if (ErrorLevel != 0) {
+			Mousemove 650, 510, 6
+			actionDelay()
+			leftClick()
+			Mousemove 650, 460, 6
+			actionDelay()
+			leftClick()
+			exitapp
+		}
 
 		Random, randX, 612, 637
 		Random, randY, 352, 365
@@ -83,31 +114,26 @@ getHerb() {
 		Random, randX, 653, 677
 		Mousemove, %randX% , %randY%, 6
 		leftClick()
-		Random, rand, 800, 1000
-		sleep %rand%
 		Send, {space down}
-		sleep Random, rand, 20, 40
+		actionDelay()
 		Send, {space up}
-		Random, sleepTimer, 10000, 12500
-		sleep %sleepTimer%
-		Random, randX, 200, 300
+		actionDelay()
+		sleep NormalRand(10000,12500)
+		Random, randX, 210, 310
 		Random, randY, 40, 210
 		Mousemove, %randX% , %randY%, 6
-		sleep 132
+		actionDelay()
 		leftClick()
-		Random, rand, 350, 500
-		sleep %rand%
+		actionDelay()
 		Random, randX, 435, 455
 		Random, randY, 325, 350
 		Mousemove, %randX% , %randY%, 6
-		sleep 93
+		actionDelay()
 		leftClick()
-		Random, rand, 350, 500
-		sleep %rand%
+		actionDelay()
+		actionDelay()
 		getVial()
-		sleep %rand%
 		getHerb()
-		sleep %rand%
 		Random, randX, 484, 496
 		Random, randY, 42, 58
 		Mousemove, %randX% , %randY%, 6
@@ -115,7 +141,9 @@ getHerb() {
 
 
 	}
-return
+
+Esc::
+	Pause
 
 `:: ; Pressing ` (~/console key) turns the AHK icon in your system tray to red to let you know that's it's suspended.
     Suspend, Permit
